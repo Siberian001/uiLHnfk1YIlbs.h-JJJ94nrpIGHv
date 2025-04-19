@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NRP Command Center</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #f4f4f4;
+    }
+    header {
+      background-color: #222;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      border-bottom: 2px solid #444;
+    }
+    .container {
+      display: flex;
+      height: 90vh;
+    }
+    .sidebar {
+      width: 300px;
+      background-color: #1c1c1c;
+      padding: 1rem;
+      border-right: 2px solid #444;
+      overflow-y: auto;
+    }
+    .main {
+      flex-grow: 1;
+      position: relative;
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+    }
+    .section {
+      margin-bottom: 1rem;
+    }
+    label, input, select, button {
+      display: block;
+      margin: 0.5rem 0;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 0.4rem;
+      background-color: #333;
+      color: #fff;
+      border: 1px solid #555;
+    }
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    🛰️ NRP Command Center
+  </header>
+  <div class="container">
+    <div class="sidebar">
+      <div class="section">
+        <h3>Create Unit</h3>
+        <label for="unitName">Name</label>
+        <input type="text" id="unitName" placeholder="e.g. B-27" />
+
+        <label for="unitType">Type</label>
+        <select id="unitType">
+          <option value="air">Air</option>
+          <option value="land">Land</option>
+          <option value="naval">Naval</option>
+          <option value="space">Space</option>
+        </select>
+
+        <label for="nation">Nation</label>
+        <input type="text" id="nation" placeholder="e.g. USA" />
+
+        <button onclick="createUnit()">Add Unit</button>
+      </div>
+      <div class="section">
+        <h3>Log</h3>
+        <div id="log" style="font-size: 0.9rem; white-space: pre-wrap;"></div>
+      </div>
+    </div>
+    <div class="main">
+      <div id="map">Map coming soon... (placeholder)</div>
+    </div>
+  </div>
+
+  <script>
+    const log = document.getElementById('log');
+    const gridRegistry = {};
+
+    function createUnit() {
+      const name = document.getElementById('unitName').value;
+      const type = document.getElementById('unitType').value;
+      const nation = document.getElementById('nation').value;
+      const unitId = `${type.slice(0,1).toUpperCase()}-${Math.floor(Math.random()*900 + 100)}`;
+      const unit = { name, type, nation, unitId };
+
+      log.textContent += `🛠️ Created ${name} (${unitId}) for ${nation} [${type.toUpperCase()}]\n`;
+
+      // Save unit somewhere or display it visually later
+    }
+  </script>
+</body>
+</html>
